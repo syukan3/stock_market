@@ -13,9 +13,7 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <%= yield %>
-
-    <div class="footer">
+    <div class="header">
       <% if user_signed_in? %>
       <br>
         Logged in as <strong><%= current_user.email %></strong>.
@@ -31,5 +29,6 @@
         <%= link_to "ログイン", new_user_session_path %>
       <% end %>
     </div>
+    <%= yield %>
   </body>
 </html>

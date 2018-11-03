@@ -1,3 +1,11 @@
 <h1>Issue#index</h1>
 <br>
 <p>銘柄一覧</p>
+<p>--------------------------------------------------------------------</p>
+<% @issues.each do |issue| %>
+  <%= link_to(issue.stock_number, issue_path(issue.id)) %> :&ensp;
+  <%= link_to(issue.company_name, issue_path(issue.id)) %>
+  <!-- 余力があれば、株価を表示したい -->
+  <p>--------------------------------------------------------------------</p>
+  <br>
+<% end %>
