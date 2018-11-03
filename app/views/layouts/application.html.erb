@@ -17,13 +17,16 @@
 
     <div class="footer">
       <% if user_signed_in? %>
+      <br>
         Logged in as <strong><%= current_user.email %></strong>.
         <%= link_to "トップ", home_top_path %> |
         <!-- 株価モデルのインデックスみたいなの入れる？？ -->
         <%= link_to "マイページ", user_path(current_user.id) %> |
+        <%= link_to "銘柄一覧", issues_path %> |
         <%= link_to "プロフィール変更", edit_user_registration_path %> |
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <% else %>
+      <br>
         <%= link_to "ユーザー登録", new_user_registration_path %> |
         <%= link_to "ログイン", new_user_session_path %>
       <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_31_130144) do
+ActiveRecord::Schema.define(version: 2018_11_03_045125) do
 
   create_table "issues", force: :cascade do |t|
     t.integer "stock_number"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2018_10_31_130144) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "stock_number"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 2018_10_31_130144) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stock_number"
   end
 
   create_table "users", force: :cascade do |t|
