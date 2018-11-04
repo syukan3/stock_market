@@ -15,9 +15,6 @@ end
 5.times do |i|
   User.create(email: "x#{i+1}@x.com", available: (i+1) * 1000000, password: "#{i+1}" + "#{i+1}" + "#{i+1}" + "#{i+1}" + "#{i+1}" + "#{i+1}")
   # Order.create(user_id: i, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
-  # Order.create(user_id: i+1, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
-  # Order.create(user_id: i+2, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
-  # Order.create(user_id: i+3, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
-  # Order.create(user_id: i+4, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
+
   Stock.create(current_price: i, max_price: i, min_price: i, start_price: i, end_price: i, stock_number: "#{i}" + "#{i+1}" + "#{i+2}" + "#{i+3}")
 end

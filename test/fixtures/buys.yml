@@ -3,9 +3,11 @@
 one:
   price: 1
   amount: 1
-  status: MyString
+  user_id: 1
+  issue_id: 1
 
 two:
   price: 1
   amount: 1
-  status: MyString
+  user_id: 1
+  issue_id: 1

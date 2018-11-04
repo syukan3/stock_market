@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_045125) do
+ActiveRecord::Schema.define(version: 2018_11_03_133418) do
+
+  create_table "buys", force: :cascade do |t|
+    t.integer "price"
+    t.integer "amount"
+    t.integer "user_id"
+    t.integer "issue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "issues", force: :cascade do |t|
     t.integer "stock_number"
@@ -19,14 +28,13 @@ ActiveRecord::Schema.define(version: 2018_11_03_045125) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "sells", force: :cascade do |t|
     t.integer "price"
     t.integer "amount"
-    t.string "status"
+    t.integer "user_id"
+    t.integer "issue_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "stock_number"
   end
 
   create_table "stocks", force: :cascade do |t|

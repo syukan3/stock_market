@@ -1,7 +1,16 @@
 <h1>Issue#show</h1>
+<br>
+<h3>
+  <%= link_to(@issue.stock_number, issue_path(@issue.id)) %> :&ensp;
+  <%= link_to(@issue.company_name, issue_path(@issue.id)) %>
+</h3>
 
 <br><br>
-<%= link_to("注文ページ", new_order_path(@issue)) %> &ensp;
+<h3>
+  注文　：　
+  <%= link_to("買い注文", new_issue_buy_path(@issue)) %> &ensp;
+  <%= link_to("売り注文", new_issue_sell_path(@issue)) %> &ensp;
+</h3>
 <br><br>
 
 <div class="chart_display">
