@@ -18,3 +18,16 @@
  .alert {
    color: red;
  }
+
+ img {
+   width: 800px;
+   height: 600px;
+ }
+
+ .t_sell {
+   color: blue;
+ }
+
+.t_buy {
+  color: red;
+}

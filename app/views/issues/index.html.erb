@@ -1,6 +1,15 @@
 <h1>Issue#index</h1>
 <br>
 <p>銘柄一覧</p>
+<br>
+<!--  検索拡張機能  -->
+<p>銘柄検索</p>
+<%= form_tag(issues_path, :method => 'get' ) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+<br><br>
+
 <hr>
 <% @issues.each do |issue| %>
   <% if issue.stock_number == 0 %>
