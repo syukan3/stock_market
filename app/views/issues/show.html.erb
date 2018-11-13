@@ -1,3 +1,5 @@
+<%= tag("div", data: { stocks: Stock.all.to_json}, id: "stockData") %>
+
 <h1>Issue#show</h1>
 <br>
 <h3>
@@ -95,5 +97,7 @@
 <div class="chart_display">
   チャートを表示する
   <br><br>
-  <%= image_tag('/1302.png') %>
+  <!-- <%= image_tag('/1302.png') %> -->
 </div>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>

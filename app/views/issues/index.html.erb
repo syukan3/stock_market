@@ -12,15 +12,9 @@
 
 <hr>
 <% @issues.each do |issue| %>
-  <% if issue.stock_number == 0 %>
-    <%= issue.stock_number %>:&ensp;
-    <%= issue.company_name %>
-    <hr>
-  <% else %>
-    <%= link_to(issue.stock_number, issue_path(issue.id)) %> :&ensp;
-    <%= link_to(issue.company_name, issue_path(issue.id)) %>
-    <!-- 余力があれば、株価を表示したい -->
-    <br>
-    <hr>
-  <% end %>
+  <%= link_to(issue.stock_number, issue_path(issue.id)) %> :&ensp;
+  <%= link_to(issue.company_name, issue_path(issue.id)) %>
+  <!-- 余力があれば、株価を表示したい -->
+  <br>
+  <hr>
 <% end %>

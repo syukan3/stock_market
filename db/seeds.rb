@@ -8,8 +8,10 @@
 
 require "csv"
 
-CSV.foreach('db/data_j.csv') do |row|
-  Issue.create(:stock_number => row[0], :company_name => row[1])
+CSV.foreach('db/data_j.csv', headers: true) do |row|
+  unless Issue.exists?(stock_number: row[0])
+    Issue.create(:stock_number => row[0], :company_name => row[1])
+  end
 end
 
 CSV.foreach('db/1301_2018.csv') do |row|

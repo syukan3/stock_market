@@ -11,7 +11,8 @@ class IssuesController < ApplicationController
     # @sell = Sell.where(issue_id: params[:id]).order(price: :asc).limit(5)
     # @posts = @room.posts.all
     @buys = @issue.buys.where(issue_id: params[:id]).order(price: :asc).limit(1)
-    @sells = @issue.sells.all
+    # @sells = @issue.sells.all
+    @sells = @issue.sells.where(issue_id: params[:id]).limit(5).order(price: :desc)
 
     @buy_1 = "1"
 
