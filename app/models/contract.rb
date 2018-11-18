@@ -1,5 +1,9 @@
 class Contract < ApplicationRecord
 
+  belongs_to :buy, optional: true
+  belongs_to :sell, optional: true
+  has_many :stocks, dependent: :destroy
+
 # 約定
 # BuyとSellのpriceが同じ時に実行
 # BuyとSellのamountを比較して、小さい方のamount分を約定

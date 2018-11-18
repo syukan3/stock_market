@@ -3,6 +3,68 @@
 <p>買付可能額： <%= @user.available %> </p>
 
 <p>保有銘柄一覧</p>
+<div class="user_issues_index">
+  <table border="1" width="500" height="100" cellpadding="10">
+    <tr align="center">
+      <th width="20%">証券No.</th>
+      <th width="35%">会社名</th>
+      <th width="25%">取得価格</th>
+      <th width="20%">数量</th>
+    </tr>
+    <% @contracts.each do |contract| %>
+    <tr align="center">
+      <td><%= link_to(contract.stock_number, issue_path(1)) %></td>
+      <td><%= %></td>
+      <td><%= contract.price %></td>
+      <td><%= contract.amount %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
 
-contractモデルから今のuser_idのデータを全て抽出
-eachで保有銘柄を全て表示（stock_number, company_name, price, amount）
+<br><br>
+
+<p>注文一覧</p>
+<p>買い注文</p>
+<div class="buy_order_index">
+  <table border="1" width="500" height="100" cellpadding="10">
+    <tr align="center">
+      <th width="20%">証券No.</th>
+      <th width="35%">会社名</th>
+      <th width="25%">注文価格</th>
+      <th width="20%">注文数量</th>
+    </tr>
+    <% @buys.each do |buy| %>
+    <tr align="center">
+      <td><%= link_to(buy.issue.stock_number, issue_path(buy.issue.id)) %></td>
+      <td><%= link_to(buy.issue.company_name, issue_path(buy.issue.id))%></td>
+      <td><%= buy.price %></td>
+      <td><%= buy.amount %></td>
+      <td><%= link_to("x", issue_buy_path(issue_id: buy.issue.id, id: buy.id), {method: "delete"})%></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<br>
+
+<p>売り注文</p>
+<div class="sell_order_index">
+  <table border="1" width="500" height="100" cellpadding="10">
+    <tr align="center">
+      <th width="20%">証券No.</th>
+      <th width="35%">会社名</th>
+      <th width="25%">注文価格</th>
+      <th width="20%">注文数量</th>
+    </tr>
+    <% @sells.each do |sell| %>
+    <tr align="center">
+      <td><%= link_to(sell.issue.stock_number, issue_path(sell.issue.id)) %></td>
+      <td><%= link_to(sell.issue.company_name, issue_path(sell.issue.id))%></td>
+      <td><%= sell.price %></td>
+      <td><%= sell.amount %></td>
+      <td><%= link_to("x", issue_sell_path(issue_id: sell.issue.id, id: sell.id), {method: "delete"})%></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

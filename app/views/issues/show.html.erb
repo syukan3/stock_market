@@ -11,7 +11,7 @@
 <h3>
   注文　：　
   <%= link_to("買い注文", new_issue_buy_path(@issue)) %> &ensp;
-  <%= link_to("売り注文", new_issue_buy_path(@issue)) %> &ensp;
+  <%= link_to("売り注文", new_issue_sell_path(@issue)) %> &ensp;
 </h3>
 
 <br><br>
@@ -23,74 +23,22 @@
       <th width="30%">価格</th>
       <th width="35%">買い気配</th>
     </tr>
+    <% @sells.each do |sell| %>
     <tr align="center">
-      <td class="t_sell">Sell_5.amount</td>
-      <td>Sell_5.price</td>
-      <td></td>
-    </tr>
-    <tr align="center">
-      <td class="t_sell">Sell_4.amount</td>
-      <td>Sell_4.price</td>
-      <td></td>
-    </tr>
-    <tr align="center">
-      <td class="t_sell">Sell_3.amount</td>
-      <td>Sell_3.price</td>
-      <td></td>
-    </tr>
-    <tr align="center">
-      <td class="t_sell">Sell_2.amount</td>
-      <td>Sell_2.price</td>
-      <td></td>
-    </tr>
-    <tr align="center">
-      <td class="t_sell">Sell_1.amount</td>
-      <td>Sell_1.price</td>
-      <td></td>
-    </tr>
-    <tr align="center">
-      <td></td>
-      <td>Buy_1.price<%= @buys %></td>
-      <td class="t_buy">Buy_1.amount</td>
-    </tr>
-    <tr align="center">
-      <td></td>
-      <td>Buy_2.price</td>
-      <td class="t_buy">Buy_2.amount</td>
-    </tr>
-    <tr align="center">
-      <td></td>
-      <td>Buy_3.price</td>
-      <td class="t_buy">Buy_3.amount</td>
-    </tr>
-    <tr align="center">
-      <td></td>
-      <td>Buy_4.price</td>
-      <td class="t_buy">Buy_4.amount</td>
-    </tr>
-    <tr align="center">
-      <td></td>
-      <td>Buy_5.price</td>
-      <td class="t_buy">Buy_5.amount</td>
-    </tr>
-  </table>
-</div>
-
-
-<table border="1" width="500" height="300" cellpadding="10">
-  <tr align="center">
-    <th width="35%">売り気配</th>
-    <th width="30%">価格</th>
-    <th width="35%">買い気配</th>
-  </tr>
-  <% @sells.each do |sell| %>
-    <tr align="center">
-      <td class="t_sell">Sell.amount</td>
+      <td class="t_sell"><%= sell.amount %></td>
       <td><%= sell.price %></td>
       <td></td>
     </tr>
-  <% end %>
-</table>
+    <% end %>
+    <% @buys.each do |buy| %>
+    <tr align="center">
+      <td></td>
+      <td><%= buy.price %></td>
+      <td class="t_buy"><%= buy.amount %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
 
 <br><br><br>
 

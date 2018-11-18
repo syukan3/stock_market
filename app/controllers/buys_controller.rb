@@ -1,5 +1,8 @@
 class BuysController < ApplicationController
 
+  before_action :available_check, {only: [:create]}
+  after_action :transaction_check, {only: [:create]}
+
   def new
     @buy = Buy.new
     @issue = Issue.find_by(id: params[:issue_id])
@@ -16,4 +19,16 @@ class BuysController < ApplicationController
       render("buys/new")
     end
   end
+
+  # def show
+  #   @buy = Buy.find_by(id: params[:id])
+  # end
+
+  def destroy
+    @buy = Buy.find_by(id: params[:id])
+    @buy.destroy
+    flash[:notice] = "注文をキャンセルしました。"
+    redirect_to(user_path(current_user))
+  end
+
 end

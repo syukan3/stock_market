@@ -7,33 +7,12 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find_by(id: params[:id])
-    # @buy = Buy.where(issue_id: params[:id]).order(price: :asc).limit(1)
-    # @sell = Sell.where(issue_id: params[:id]).order(price: :asc).limit(5)
-    # @posts = @room.posts.all
-    @buys = @issue.buys.where(issue_id: params[:id]).order(price: :asc).limit(1)
-    # @sells = @issue.sells.all
-    @sells = @issue.sells.where(issue_id: params[:id]).limit(5).order(price: :desc)
 
-    @buy_1 = "1"
+    @buys = @issue.buys.where(issue_id: params[:id]).order(price: :desc).limit(5)
 
-
-    # if @issue.image.attached?
-    #   return
-    # else
-    # # チャートが作成済みでなければ、gnuplotでチャートを作成
-    #   Gnuplot.open do |gp|
-    #     Gnuplot::SPlot.new(gp) do |plot|
-    #       plot.terminal "png"
-    #       plot.output   "1301.png"
-    #       plot.set "isosamples 50,50"
-    #       plot.set "pm3d at b"
-    #       plot.data << Gnuplot::DataSet.new("sin(sqrt(x*x+y*y))/sqrt(x*x+y*y)")
-    #     end
-    #     gets
-    #   end
-    # # gnuplotで作成したチャートをActiveStorageに保存
-    #   @issue.image.attached("1301.png")
-    # end
+    sell_pre1 = @issue.sells.where(issue_id: params[:id]).order(price: :asc)
+    sell_pre2 = sell_pre1.limit(5)
+    @sells = sell_pre2.order(price: :desc)
 
   end
 

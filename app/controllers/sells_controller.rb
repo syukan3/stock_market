@@ -1,5 +1,8 @@
 class SellsController < ApplicationController
 
+  before_action :stock_check, {only: [:create]}
+  after_action :transaction_check, {only: [:create]}
+
   def new
     @sell = Sell.new
     @issue = Issue.find_by(id: params[:issue_id])
@@ -16,5 +19,16 @@ class SellsController < ApplicationController
       render("sells/new")
     end
   end
-  
+
+  def show
+    @sell = Sell.find_by(id: params[:id])
+  end
+
+  def destroy
+    @sell = Sell.find_by(id: params[:id])
+    @sell.destroy
+    flash[:notice] = "注文をキャンセルしました。"
+    redirect_to(user_path(current_user))
+  end
+
 end
