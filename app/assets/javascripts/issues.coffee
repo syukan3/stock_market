@@ -2,98 +2,33 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# json-data 受け取り
 ready = ->
-  # console.log(document.getElementById("stockData").dataset.stocks)
   stocks = JSON.parse(document.getElementById("stockData").dataset.stocks);
   console.log(stocks)
+  # no-need this console/ check for input
+
+  visualizationStock = stocks.map (stock) ->
+    [stock.date, stock.min_price, stock.start_price, stock.end_price, stock.max_price]
+  console.log(visualizationStock)
+  # no-need this console/ check for input
+
+  # Google chart
+  drawChart = ->
+    data = google.visualization.arrayToDataTable(visualizationStock, true);
+
+    options = {
+      legend:'none'
+    };
+
+    chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+    return
+
+  google.charts.load 'current', 'packages': [ 'corechart' ]
+  google.charts.setOnLoadCallback drawChart
+
+# json-data 受け取り
 $(document).ready(ready)
 $(document).on('page:load', ready)
-
-# Google chart
-drawChart = ->
-  dataArray = [ [
-    'Day'
-    'Low'
-    'Start'
-    'End'
-    'High'
-  ] ]
-  df = $.Deferred()
-  $ ->
-    $.ajax(
-      url: stocks
-      dataType: 'json').done((data) ->
-      console.log 'success'
-      $(data).each ->
-        data_item = [
-          @day
-          @low
-          @start
-          @end
-          @high
-        ]
-        dataArray.push data_item
-        return
-      df.resolve()
-      return
-    ).fail ->
-      console.log 'error'
-      return
-    return
-  df.done ->
-    chartdata = google.visualization.arrayToDataTable(dataArray)
-    options = legend: 'none'
-    chart = new (google.visualization.CandlestickChart)(document.getElementById('chart_div'))
-    chart.draw chartdata, options
-    return
-  return
-
-google.charts.load 'current', 'packages': [ 'corechart' ]
-google.charts.setOnLoadCallback drawChart
-
-
-# drawChart = ->
-#   data = google.visualization.arrayToDataTable([
-#     [
-#       'Mon'
-#       20
-#       28
-#       38
-#       45
-#     ]
-#     [
-#       'Tue'
-#       31
-#       38
-#       55
-#       66
-#     ]
-#     [
-#       'Wed'
-#       50
-#       55
-#       77
-#       80
-#     ]
-#     [
-#       'Thu'
-#       77
-#       77
-#       66
-#       50
-#     ]
-#     [
-#       'Fri'
-#       68
-#       66
-#       22
-#       15
-#     ]
-#   ], true)
-#   options = legend: 'none'
-#   chart = new (google.visualization.CandlestickChart)(document.getElementById('chart_div'))
-#   chart.draw data, options
-#   return
-#
-# google.charts.load 'current', 'packages': [ 'corechart' ]
-# google.charts.setOnLoadCallback drawChart

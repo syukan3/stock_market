@@ -1,6 +1,6 @@
 class SellsController < ApplicationController
 
-  before_action :stock_check, {only: [:create]}
+  before_action :having_stock_check, {only: [:create]}
   after_action :transaction_check, {only: [:create]}
 
   def new

@@ -1,4 +1,4 @@
-<%= tag("div", data: { stocks: Stock.all.to_json}, id: "stockData") %>
+<%= tag("div", data: { stocks: Stock.where(stock_number: @issue.stock_number).limit(100).to_json}, id: "stockData") %>
 
 <h1>Issue#show</h1>
 <br>
@@ -6,6 +6,8 @@
   <%= link_to(@issue.stock_number, issue_path(@issue.id)) %> :&ensp;
   <%= link_to(@issue.company_name, issue_path(@issue.id)) %>
 </h3>
+
+
 
 <br><br>
 <h3>
@@ -43,7 +45,6 @@
 <br><br><br>
 
 <div class="chart_display">
-  チャートを表示する
   <br><br>
   <!-- <%= image_tag('/1302.png') %> -->
 </div>

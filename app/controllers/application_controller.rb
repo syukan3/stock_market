@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def stock_check
+  def having_stock_check
     @contract = Contract.find_by(user_id: current_user.id, stock_number: params[:issue_id])
     if @contract == nil
       flash[:notice] = "この銘柄を保有していません。"
@@ -26,23 +26,33 @@ class ApplicationController < ActionController::Base
     @buy = Buy.order(price: :desc).find_by(issue_id: @issue.id)
     @sell = Sell.order(price: :asc).find_by(issue_id: @issue.id)
     if @buy.price == @sell.price && @buy.amount == @sell.amount
-      @contract_buy = Contract.new(user_id: @buy.user_id, stock_number: @buy.issue_id, price: @buy.price, amount:@buy.amount)
-      @contract_sell = Contract.find_by(user_id: @sell.user_id, stock_number: @sell.issue_id, price: @sell.price, amount:@sell.amount)
+      @contract_buy = Contract.new(user_id: @buy.user_id, stock_number: @buy.issue_id, price: @buy.price, amount: @buy.amount)
+      @contract_sell = Contract.find_by(user_id: @sell.user_id, stock_number: @sell.issue_id, amount: @sell.amount)
       @user_buy = User.find_by(id: @buy.user_id)
       @user_sell = User.find_by(id: @sell.user_id)
-      if @contract_buy.save
-        @buy.destroy
-        @sell.destroy
-        # @contract_sell.destroy
-        @user_buy.available -= @buy.price * @buy.amount
-        @user_sell.available += @sell.price * @sell.amount
-        @user_buy.save
-        @user_sell.save
-        flash[:notice] ="約定しました。"
+      ActiveRecord::Base.transaction do
+        if @contract_buy.save
+          @buy.destroy
+          @sell.destroy
+          @contract_sell.destroy
+
+          @contract = Contract.where(stock_number: @issue.stock_number, created_at: 1.day.ago.all_day)
+          @stock = Stock.new
+          @stock.min_price = @contract.price.minimum('price')
+          @stock.start_price = @contract.price.minimum('created_at')
+          @stock.end_price = @contract.price.maximum('created_at')
+          @stock.max_price = @contract.price.maximum('price')
+          @stock.save
+
+          @user_buy.available -= @buy.price * @buy.amount
+          @user_sell.available += @sell.price * @sell.amount
+          @user_buy.save
+          @user_sell.save
+          flash[:notice] ="約定しました。"
+        end
       end
     end
   end
-
 
   protected
     def configure_permitted_parameters

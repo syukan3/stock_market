@@ -2,7 +2,7 @@ class Contract < ApplicationRecord
 
   belongs_to :buy, optional: true
   belongs_to :sell, optional: true
-  has_many :stocks, dependent: :destroy
+  has_many :stocks
 
 # 約定
 # BuyとSellのpriceが同じ時に実行
