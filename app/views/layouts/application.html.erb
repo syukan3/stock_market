@@ -16,12 +16,13 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-    <div class="header">
-      <% if user_signed_in? %>
-      <br>
+      <div class="header">
+        <% if user_signed_in? %>
+        <br>
         Logged in as <strong><%= current_user.email %></strong>.
         <%= link_to "トップ", home_top_path %> |
         <!-- 株価モデルのインデックスみたいなの入れる？？ -->
@@ -29,12 +30,13 @@
         <%= link_to "銘柄一覧", issues_path %> |
         <%= link_to "プロフィール変更", edit_user_registration_path %> |
         <%= link_to "ログアウト", destroy_user_session_path, method: :DELETE %>
-      <% else %>
-      <br>
+        <% else %>
+        <br>
         <%= link_to "ユーザー登録", new_user_registration_path %> |
         <%= link_to "ログイン", new_user_session_path %>
-      <% end %>
+        <% end %>
+      </div>
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
 </html>
