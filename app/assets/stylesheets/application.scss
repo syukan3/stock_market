@@ -17,15 +17,58 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+body {
+  background-color: #eeeae2;
+}
+
+img {
+  z-index: 0;
+}
+
+// .container {
+//     max-width: 100%;
+// }
+
+#title {
+  position: absolute;
+  top: 5px;
+  left: 80px;
+  font-size: 100px;
+  font-family: cursive;
+  font-style: italic;
+  color: #eeeae2;
+  z-index: 1;
+
+}
+
+.navbar {
+
+}
+
  .notice,
  .alert {
    color: red;
+   padding: 0;
+   border: 0;
+   margin-bottom: 0;
  }
 
- img {
-   width: 800px;
-   height: 600px;
- }
+#login {
+  float: right;
+}
+
+.head {
+  color: #eeeae2;
+  font-size: 20px;
+}
+
+.head-left {
+  float: left;
+}
+
+.head-right {
+  float: right;
+}
 
  .t_sell {
    color: blue;
@@ -33,4 +76,8 @@
 
 .t_buy {
   color: red;
+}
+
+span {
+  font-size: 16px;
 }

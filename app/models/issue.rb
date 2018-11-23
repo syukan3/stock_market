@@ -1,7 +1,7 @@
 class Issue < ApplicationRecord
-  has_many :stocks, dependent: :destroy
-  has_many :buys, dependent: :destroy
-  has_many :sells, dependent: :destroy
+  has_many :stocks
+  has_many :buys
+  has_many :sells
   has_one_attached :image
 
   def self.search(search) #ここでのself.は Issue. を意味する

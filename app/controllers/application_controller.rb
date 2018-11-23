@@ -30,18 +30,24 @@ class ApplicationController < ActionController::Base
       @contract_sell = Contract.find_by(user_id: @sell.user_id, stock_number: @sell.issue_id, amount: @sell.amount)
       @user_buy = User.find_by(id: @buy.user_id)
       @user_sell = User.find_by(id: @sell.user_id)
+
       ActiveRecord::Base.transaction do
         if @contract_buy.save
           @buy.destroy
           @sell.destroy
           @contract_sell.destroy
 
-          @contract = Contract.where(stock_number: @issue.stock_number, created_at: 1.day.ago.all_day)
-          @stock = Stock.new
-          @stock.min_price = @contract.price.minimum('price')
-          @stock.start_price = @contract.price.minimum('created_at')
-          @stock.end_price = @contract.price.maximum('created_at')
-          @stock.max_price = @contract.price.maximum('price')
+          @contracts = Contract.where(stock_number: @issue.id, created_at: Time.zone.today.all_day)
+          contract_min = @contracts.order(price: :asc).first
+          contract_max = @contracts.order(price: :desc).first
+          contract_start = @contracts.order(created_at: :asc).first
+          contract_end = @contracts.order(created_at: :desc).first
+          # ※注意： .limit(1)で取得すると.priceとかで値を取得できない。
+          @stock = Stock.find_or_create_by(stock_number: @issue.stock_number, date: Date.today)
+          @stock.min_price = contract_min.price
+          @stock.start_price = contract_start.price
+          @stock.end_price = contract_end.price
+          @stock.max_price = contract_max.price
           @stock.save
 
           @user_buy.available -= @buy.price * @buy.amount

@@ -1,8 +1,12 @@
-<h1>Users#show</h1>
+<br><br>
+<h2>マイページ</h2>
+<br>
 
-<p>買付可能額： <%= @user.available %> </p>
+<h5>買付可能額： <%= @user.available %> </h5>
 
-<p>保有銘柄一覧</p>
+<br>
+
+<h5>保有銘柄一覧</h5>
 <div class="user_issues_index">
   <table border="1" width="500" height="100" cellpadding="10">
     <tr align="center">
@@ -24,8 +28,8 @@
 
 <br><br>
 
-<p>注文一覧</p>
-<p>買い注文</p>
+<h5>注文一覧</h5>
+<h6>買い注文</h6>
 <div class="buy_order_index">
   <table border="1" width="500" height="100" cellpadding="10">
     <tr align="center">
@@ -40,7 +44,7 @@
       <td><%= link_to(buy.issue.company_name, issue_path(buy.issue.id))%></td>
       <td><%= buy.price %></td>
       <td><%= buy.amount %></td>
-      <td><%= link_to("x", issue_buy_path(issue_id: buy.issue.id, id: buy.id), {method: "delete"})%></td>
+      <td><%= link_to("x", "/buys/destroy", method: :delete, class: 'command', data: { confirm: 'Sure?' })%></td>
     </tr>
     <% end %>
   </table>
@@ -48,7 +52,7 @@
 
 <br>
 
-<p>売り注文</p>
+<h6>売り注文</h6>
 <div class="sell_order_index">
   <table border="1" width="500" height="100" cellpadding="10">
     <tr align="center">

@@ -7,6 +7,8 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find_by(id: params[:id])
+    @stock_today = Stock.find_by(stock_number: @issue.stock_number, date: Date.today)
+    @stock_yesterday = Stock.find_by(stock_number: @issue.stock_number, date: Date.today - 1)
 
     @buys = @issue.buys.where(issue_id: params[:id]).order(price: :desc).limit(5)
 

@@ -12,30 +12,42 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-
   </head>
 
   <body>
+    <%= image_tag('/Olli-2.jpg', :size =>'1365x200') %>
+    <h2 id="title">- Stock Market -</h2>
+    <nav class="navbar navbar-light" style="background-color: #282c36;">
+      <div class="header">
+
+        <% if user_signed_in? %>
+          <br>
+          <div class="head">
+            <div class="head-left">
+              <%= link_to "トップ", home_top_path %> |
+              <!-- 株価モデルのインデックスみたいなの入れる？？ -->
+              <%= link_to "銘柄一覧", issues_path %> |
+            </div>
+            <div class="head-right">
+              <%= link_to "マイページ", user_path(current_user.id) %> |
+              <%= link_to "プロフィール変更", edit_user_registration_path %> |
+              <%= link_to "ログアウト", destroy_user_session_path, method: :DELETE %>
+              <div id="login">Logged in as : <strong><%= current_user.email %></strong>.</div>
+            </div>
+          </div>
+        <% else %>
+          <br>
+          <div class="head-right">
+            <%= link_to "ユーザー登録", new_user_registration_path %> |
+            <%= link_to "ログイン", new_user_session_path %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
     <div class="container">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 
-      <div class="header">
-        <% if user_signed_in? %>
-        <br>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to "トップ", home_top_path %> |
-        <!-- 株価モデルのインデックスみたいなの入れる？？ -->
-        <%= link_to "マイページ", user_path(current_user.id) %> |
-        <%= link_to "銘柄一覧", issues_path %> |
-        <%= link_to "プロフィール変更", edit_user_registration_path %> |
-        <%= link_to "ログアウト", destroy_user_session_path, method: :DELETE %>
-        <% else %>
-        <br>
-        <%= link_to "ユーザー登録", new_user_registration_path %> |
-        <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
-      </div>
       <%= yield %>
     </div>
   </body>
