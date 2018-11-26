@@ -3,4 +3,5 @@ class Stock < ApplicationRecord
   has_many :buys
   has_many :sells
   has_many :contracts
+  belongs_to :issue
 end

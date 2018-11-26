@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
         if @contract_buy.save
           @buy.destroy
           @sell.destroy
+          # buy / sell と紐付けた contract_id = nilならみ約定、!= nilなら約定。
           @contract_sell.destroy
 
           @contracts = Contract.where(stock_number: @issue.id, created_at: Time.zone.today.all_day)
