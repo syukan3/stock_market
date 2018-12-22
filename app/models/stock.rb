@@ -1,4 +1,7 @@
 class Stock < ApplicationRecord
   belongs_to :user, optional: true
-  has_many :orders, dependent: :destroy
+  has_many :buys
+  has_many :sells
+  has_many :contracts
+  belongs_to :issue
 end

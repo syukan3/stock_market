@@ -1,9 +1,59 @@
-<h1>Issue#show</h1>
+<% stock_data_pre = Stock.where(stock_number: @issue.stock_number).order(date: :desc).limit(50)%>
+<% stock_data = stock_data_pre.sort{|a, b| a <=> b } %>
+<%= tag("div", data: { stocks: stock_data.to_json}, id: "stockData") %>
+<!-- <%= tag("div", data: { stocks: Stock.where(stock_number: @issue.stock_number).limit(100).to_json}, id: "stockData") %> -->
+
+
+<br>
+<br>
+
+<h3>
+  <%= link_to(@issue.stock_number, issue_path(@issue.id)) %> :&ensp;
+  <%= link_to(@issue.company_name, issue_path(@issue.id)) %>&ensp;&ensp;&ensp;
+  <span>現在値： </span><%= @stock_today.end_price %> <span>　前日比： <%= @stock_today.end_price - @stock_yesterday.end_price %>（ <%= (@stock_today.end_price - @stock_yesterday.end_price) / @stock_yesterday.end_price %> ％）</span>
+</h3>
+
+
+
+
 
 <br><br>
-<%= link_to("注文ページ", new_order_path(@issue)) %> &ensp;
+<h5>
+  注文　：　
+  <%= link_to("買い注文", new_issue_buy_path(@issue)) %> &ensp;/&ensp;
+  <%= link_to("売り注文", new_issue_sell_path(@issue)) %> &ensp;
+</h5>
+
+<br>
+
+<div class="board_display">
+  <table border="1" width="500" height="300" cellpadding="10">
+    <tr align="center">
+      <th width="35%">売り気配</th>
+      <th width="30%">価格</th>
+      <th width="35%">買い気配</th>
+    </tr>
+    <% @sells.each do |sell| %>
+    <tr align="center">
+      <td class="t_sell"><%= sell.amount %></td>
+      <td><%= sell.price %></td>
+      <td></td>
+    </tr>
+    <% end %>
+    <% @buys.each do |buy| %>
+    <tr align="center">
+      <td></td>
+      <td><%= buy.price %></td>
+      <td class="t_buy"><%= buy.amount %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
 <br><br>
 
 <div class="chart_display">
-  チャートを表示する
+  <!-- <%= image_tag('/1302.png') %> -->
 </div>
+
+<div id="chart_div" style="width: 600px; height: 400px;"></div>

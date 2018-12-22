@@ -2,7 +2,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: current_user.id)
-    @hold_stocks = Order.where(user_id: current_user.id, status: "hold")
+    @contracts = Contract.where(user_id: current_user.id).order(stock_number: :asc)
+    @buys = Buy.where(user_id: current_user.id)
+    @sells =Sell.where(user_id: current_user.id)
   end
 
 

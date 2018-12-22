@@ -1,3 +1,22 @@
-<h1>Issue#index</h1>
 <br>
-<p>銘柄一覧</p>
+<br>
+<h2>銘柄一覧</h2>
+<br>
+<br>
+<!--  検索拡張機能  -->
+<%= form_tag(issues_path, :method => 'get' ) do %>
+<h5>銘柄検索 :
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', :name => nil %>
+</h5>
+<% end %>
+<br><br>
+
+<hr>
+<% @issues.each do |issue| %>
+  <%= link_to(issue.stock_number, issue_path(issue.id)) %> :&ensp;
+  <%= link_to(issue.company_name, issue_path(issue.id)) %>
+  <!-- 余力があれば、株価を表示したい -->
+  <br>
+  <hr>
+<% end %>

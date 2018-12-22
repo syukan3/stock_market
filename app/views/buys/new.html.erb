@@ -1,0 +1,14 @@
+<h1>Buys#new</h1>
+
+<%= form_tag(issue_buys_path(@issue), method: "post") do %>
+  <input type="hidden" name="user_id" value=<%= current_user.id %>>
+  <input type="hidden" name="issue_id" value=<%= @issue.stock_number %>>
+
+  <label for="price">Price</label>
+  <input type="text" id="price" name="price">  <br>
+
+  <label for="amount">Amount</label>
+  <input type="text" id="amount" name="amount"><br><br>
+
+  <input type="submit" value="注文">
+<% end %>
