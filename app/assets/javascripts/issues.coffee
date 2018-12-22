@@ -18,8 +18,16 @@ ready = ->
     data = google.visualization.arrayToDataTable(visualizationStock, true);
 
     options = {
+      color:''
       legend:'none'
-    };
+      backgroundColor:'#eeeae2'
+      candlestick: {
+        fallingColor: { strokeWidth: 0, fill: '#325ddf' },
+        risingColor: { strokeWidth: 0, fill: '#a52714' }
+      }
+      chartArea:{left:'60',top:'10',right:'10',bottom:'70'}
+        # '#282c36' '#eeeae2'
+    }
 
     chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
 

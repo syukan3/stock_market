@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  get '/buys/destroy' => 'buys#destroy'
+
   resources :users, only: %i(show)
   resources :issues, only: %i(index show) do
     resources :buys, only: %i(index create new update edit destroy show)

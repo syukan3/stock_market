@@ -65,3 +65,6 @@ gem 'devise'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+
+gem 'bootstrap', '~> 4.1.1'
+gem 'mini_racer'
