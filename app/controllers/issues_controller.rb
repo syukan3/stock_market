@@ -15,7 +15,6 @@ class IssuesController < ApplicationController
     sell_pre1 = @issue.sells.where(issue_id: params[:id]).order(price: :asc)
     sell_pre2 = sell_pre1.limit(5)
     @sells = sell_pre2.sort{|a, b| b <=> a }
-
   end
 
 

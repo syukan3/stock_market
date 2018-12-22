@@ -26,6 +26,7 @@ class BuysController < ApplicationController
 
   def destroy
     @buy = Buy.find_by(id: params[:id])
+    byebug
     @buy.destroy
     flash[:notice] = "注文をキャンセルしました。"
     redirect_to(user_path(current_user))

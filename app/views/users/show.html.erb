@@ -17,8 +17,8 @@
     </tr>
     <% @contracts.each do |contract| %>
     <tr align="center">
-      <td><%= link_to(contract.stock_number, issue_path(1)) %></td>
-      <td><%= %></td>
+      <td><%= link_to(contract.stock.issue.stock_number, issue_path(contract.stock.issue_id)) %></td>
+      <td><%= link_to(contract.stock.issue.company_name, issue_path(contract.stock.issue_id)) %></td>
       <td><%= contract.price %></td>
       <td><%= contract.amount %></td>
     </tr>
@@ -44,7 +44,8 @@
       <td><%= link_to(buy.issue.company_name, issue_path(buy.issue.id))%></td>
       <td><%= buy.price %></td>
       <td><%= buy.amount %></td>
-      <td><%= link_to("x", "/buys/destroy", method: :delete, class: 'command', data: { confirm: 'Sure?' })%></td>
+      <!-- <td><%= link_to("x", "/buys/destroy", method: :delete, class: 'command', data: { confirm: 'Sure?' })%></td> -->
+      <td><%= link_to("x", issue_buy_path(buy.issue_id, buy.id), method: :delete, class: 'command', data: { confirm: 'Sure?' })%></td>
     </tr>
     <% end %>
   </table>
